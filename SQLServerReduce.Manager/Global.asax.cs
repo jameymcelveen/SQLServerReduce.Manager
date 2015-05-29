@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
+using System.Web.Caching;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -16,6 +18,9 @@ namespace SQLServerReduce.Manager
     {
         protected void Application_Start()
         {
+            HttpContext.Current.Cache["DB"] = ConfigurationManager.AppSettings["DB"];
+            HttpContext.Current.Cache["MQ"] = ConfigurationManager.AppSettings["MQ"];                     
+
             AreaRegistration.RegisterAllAreas();
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
